@@ -1,11 +1,10 @@
 # manifests/site.pp
 
-node default {
+node 'puppet.puppetserver.svc.cluster.local', default {
+  notify { 'Found the right node!': }
+  
   file { '/tmp/puppet_test.txt':
     ensure  => file,
-    content => "Puppet is running on ${facts['networking']['fqdn']}\nManaged by Pupperware on OrbStack.\n",
-    mode    => '0644',
+    content => "Successfully applied to ${facts['networking']['fqdn']}\n",
   }
-
-  notify { 'Puppet connection successful!': }
 }
